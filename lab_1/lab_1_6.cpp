@@ -6,29 +6,46 @@
 #include "lab_1_6.h"
 
 // TODO: iterators was be returned
-list<int> f1(){
-    return list<int>{};
+NODE* create_empty_set(){
+    NODE *first_element = Alloc(1);
+    return first_element;
 }
 
-bool f2(list<int>& testing){
-    return testing.empty();
+bool is_empty(NODE* testing){
+    return testing == nullptr;
 }
 
-bool f3(int element, list<int>& testing_list){
-    return ranges::find(testing_list, element) != testing_list.end();
+bool check_item(int element, NODE* testing_list){
+    for (auto iter = testing_list; iter != nullptr; iter=iter->pNext){
+        if (element == iter-> item){
+            return true;
+        }
+    }
+    return false;
 }
 
-list<int> f4(list<int>& list_, int new_element, bool check_element(int)){
-    if (check_element(new_element) && f3(new_element, list_)){
-        std::list<int> new_list = {new_element};
-        auto iter3 = new_list.cend();
-        new_list.insert(iter3, list_.begin(), list_.end());
-        return new_list;
+NODE* add_item(int new_element,  NODE* list_, bool check_element_func(int)){
+    if (check_element_func(new_element) && check_item(new_element, list_)){
+        NODE *new_first_element = Alloc(1);
+        new_first_element->item = new_element;
+        new_first_element->pNext = list_;
+        return new_first_element;
     }
     return list_;
 }
 
-//Node::iterator Node::begin() {
-//    return iterator(this)
+//NODE create_set(){
+//
 //}
+
+PNODE Alloc(int n)
+{
+    auto buff = static_cast<PNODE>(malloc(SIZEOF_NODE * n));
+    if (!buff)
+    {
+        abort();
+    }
+
+    return buff;
+}
 
