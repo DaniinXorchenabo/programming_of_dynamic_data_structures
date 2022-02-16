@@ -28,3 +28,7 @@ list<int> f4(list<int>& list_, int new_element, bool check_element(int)){
     return list_;
 }
 
+//Node::iterator Node::begin() {
+//    return iterator(this)
+//}
+
