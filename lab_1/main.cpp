@@ -1,28 +1,36 @@
 #include <iostream>
+#include <Windows.h>
 #include "lab_1_6.h"
+#include "defines.h"
+
+//PNODE Init(VOID)
+//{
+//    PNODE _set = (PNODE)calloc(1, SIZEOF_NODE);
+//    if (!_set)
+//    {
+//        abort();
+//    }
+//    return _set;
+//}
+
+
+
 
 int main() {
-    std::cout << "Hello, World! from lab_1" << std::endl;
-    Node s3 = {3};
-    Node s2 = {2 , &s3};
-    Node s1 = {1, &s2};
+//PNODE _set = Init();
+//    _set->item = 255;
+    auto f = create_empty_set();
 
+    std::cout << "Hello, World! from lab_1 "<< check_item(3, f) << std::endl;
 
+    NODE* first_item = create_set(5, 10 ,15,
+                                  [](int i){return ((i % 2) == 0);});
 
+    SET_FOR_EACH(first_item, iter){
+        std::cout << iter->item<<", ";
 
-    for (auto iter = s1.begin(); iter != nullptr; ++iter)
-    {
-        std::cout << iter->item << std::endl;
     }
-//    for (array<int>::iterator iter = arr.begin(); iter != arr.end(); ++iter)
-//    {
-//        *iter = 5;
-//    }
-//    for (array<int>::iterator iter = arr.begin(); iter != arr.end(); ++iter)
-//    {
-//        std::cout << *iter << std::endl;
-//    }
-//    std::copy(arr.begin(), arr.end(), std::ostream_iterator<int>(std::cout, "\n"));
+    std::cout<<endl;
 
     return 0;
 }
