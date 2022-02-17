@@ -58,4 +58,11 @@ NODE* add_item(int new_element,  NODE* list_, bool check_element_func(int));  //
 
 NODE* create_set(int item_count, int min_, int max_, bool check_element_func(int));
 
+int len(NODE* set_);
+
+std::string as_string(NODE* set_, std::string splitter = ", ");
+
+NODE* delete_set(NODE* set_);
+
+
 #endif //PROGRAMMING_OF_DYNAMIC_DATA_STRUCTURES_LAB_1_6_H
