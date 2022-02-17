@@ -36,8 +36,8 @@ using namespace std;
 
 typedef struct NODE_
 {
-    NODE_ *pNext;
-    int item;
+    NODE_ *pNext = nullptr;
+    int item = INT_MAX;
 
     auto operator<=>(const NODE_&) const = default;
     bool operator==(const NODE_&) const = default;
@@ -45,15 +45,17 @@ typedef struct NODE_
 } NODE, *PNODE;
 
 
-PNODE Alloc(int n);
+PNODE Alloc();
 
 
 NODE* create_empty_set(); //create empty list
 
-bool is_empty(NODE* testing); // list is empty?
+bool is_empty_set(NODE* testing); // list is empty?
 
 bool check_item(int element, NODE* testing); // принадлежит ли элемент списку
 
 NODE* add_item(int new_element,  NODE* list_, bool check_element_func(int));  // add a new element in list
+
+NODE* create_set(int item_count, int min_, int max_, bool check_element_func(int));
 
 #endif //PROGRAMMING_OF_DYNAMIC_DATA_STRUCTURES_LAB_1_6_H
