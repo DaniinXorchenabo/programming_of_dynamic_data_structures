@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 3.21)
 project(programming_of_dynamic_data_structures)
 
 set(CMAKE_CXX_STANDARD 20)
+if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.12.25835)
+    set(CMAKE_CXX20_STANDARD_COMPILE_OPTION "-std:c++latest")
+    set(CMAKE_CXX20_EXTENSION_COMPILE_OPTION "-std:c++latest")
+endif()
 
-add_executable(lab_1  lab_1/main.cpp lab_1/lab_1_6.cpp lab_1/lab_1_6.h)
+add_executable(lab_1  lab_1/main.cpp lab_1/lab_1_6.cpp lab_1/lab_1_6.h lab_1/defines.h)
 add_executable(lab_2  lab_2/main.cpp)
+# add_executable(Ilya_lab_1 lab_1/lab_1_6.h)
