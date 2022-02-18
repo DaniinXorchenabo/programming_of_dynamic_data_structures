@@ -3,33 +3,24 @@
 #include "lab_1_6.h"
 #include "defines.h"
 
-//PNODE Init(VOID)
-//{
-//    PNODE _set = (PNODE)calloc(1, SIZEOF_NODE);
-//    if (!_set)
-//    {
-//        abort();
-//    }
-//    return _set;
-//}
-
-
-
 
 int main() {
-//PNODE _set = Init();
-//    _set->item = 255;
-    auto f = create_empty_set();
 
-    std::cout << "Hello, World! from lab_1 "<< check_item(3, f) << std::endl;
+    NODE* A = create_set(5, 10 ,13,
+                                  [](int i){return (i >= 10 && i <=60 && i % 10 > 7);});
+    NODE* B = create_set(5, 10 ,40,
+                         [](int i){return (i >= 10 && i <=60 && i % 10 > 5);});
 
-    NODE* first_item = create_set(5, 10 ,15,
-                                  [](int i){return ((i % 2) == 0);});
+    std::cout<<"a set of A is: "<< set_as_string(A)<<endl;
+    std::cout<<"a set of B is: "<< set_as_string(B)<<endl;
+    std::cout<<"size the set of A is: "<< len(A)<<endl;
+    std::cout<<"size the set of B is: "<< len(B)<<endl;
+    std::cout<<"deleting sets  A and  B ..."<<endl;
+    delete_set(A);
+    delete_set(B);
+    std::cout<<"a set of A after deleted is: "<< set_as_string(A)<<endl;
+    std::cout<<"a set of B after deleted is: "<< set_as_string(B)<<endl;
 
-    SET_FOR_EACH(first_item, iter){
-        std::cout << iter->item<<", ";
-
-    }
     std::cout<<endl;
 
     return 0;
