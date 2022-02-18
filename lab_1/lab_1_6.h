@@ -60,7 +60,7 @@ NODE* create_set(int item_count, int min_, int max_, bool check_element_func(int
 
 int len(NODE* set_);
 
-std::string as_string(NODE* set_, std::string splitter = ", ");
+std::string set_as_string(NODE* set_, const std::string& splitter = ", ");
 
 NODE* delete_set(NODE* set_);
 

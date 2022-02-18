@@ -60,14 +60,24 @@ NODE* create_set(int item_count, int min_, int max_, bool check_element_func(int
 
     std::vector<int> second(numbers_out.begin(), numbers_out.end());
 
-    std::cout<<endl;
+//    std::cout<<endl;
     rng::shuffle(second, gen);
     NODE* first_node = nullptr;
+    int real_count = 0;
     for (auto iter: second | vw::take(item_count))
     {
         first_node = add_item(iter, first_node, check_element_func);
+        real_count++;
     }
-    std::cout<<"set was created"<<endl;
+    if (real_count < item_count) {
+        std::cout <<  "impossible interval (" << min_ << ", " << max_ << ") for items count is " << item_count << endl;
+        std::cout<<real_count<<" < " << item_count << endl;
+    }
+
+    if (real_count == 0){
+        return create_empty_set();
+    }
+
     return first_node;
 
 }
@@ -83,9 +93,9 @@ int len(NODE* set_){
     return size;
 }
 
-std::string as_string(NODE* set_, const std::string& splitter = ", "){
+std::string set_as_string(NODE* set_, const std::string& splitter){
     if (is_empty_set(set_)){
-        return "";
+        return "<empty set>";
     }
     std::string data = "";
     SET_FOR_EACH(set_, iter){
@@ -98,7 +108,26 @@ std::string as_string(NODE* set_, const std::string& splitter = ", "){
 }
 
 NODE* delete_set(NODE* set_){
+    NODE* last_node = nullptr;
+    NODE* last_last_node = nullptr;
 
+    if (is_empty_set(set_)){
+        return set_;
+    }
+    SET_FOR_EACH(set_, iter){
+        if (last_node){
+            if(last_last_node){
+                free(last_node);
+            } else {
+                last_node->pNext = nullptr;
+                last_node->item = INT_MAX;
+            }
+
+        }
+        last_last_node = last_node;
+        last_node = iter;
+    }
+    return set_;
 }
 
 
