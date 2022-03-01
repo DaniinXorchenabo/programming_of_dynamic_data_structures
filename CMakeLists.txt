@@ -7,6 +7,6 @@ if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 19.12.25835)
     set(CMAKE_CXX20_EXTENSION_COMPILE_OPTION "-std:c++latest")
 endif()
 
-add_executable(lab_1  lab_1/main.cpp lab_1/lab_1_6.cpp lab_1/lab_1_6.h lab_1/defines.h)
-add_executable(lab_2  lab_2/main.cpp)
+add_executable(lab_1  lab_1/main.cpp  lab_1/lab_1_6.h lab_1/lab_1_6.cpp lab_1/defines.h)
+add_executable(lab_2  lab_2/main.cpp  lab_2/lab_2_6.h lab_2/lab_2_6.cpp lab_2/defines.h)
 # add_executable(Ilya_lab_1 lab_1/lab_1_6.h)
