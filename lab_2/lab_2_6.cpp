@@ -116,6 +116,71 @@ NODE *delete_set(NODE *set_) {
     return set_;
 }
 
+bool is_subset(NODE *subset, NODE* base_set){
+
+    SET_FOR_EACH(subset, iter) {
+        if (!check_item(iter->item, base_set)){
+            return false;
+        }
+    }
+    return true;
+
+}
+
+bool is_equal(NODE *one, NODE* two){
+    return is_subset(one, two) && is_subset(two, one);
+}
+
+NODE * union_sets(NODE *big, NODE* small){
+    NODE* result = create_empty_set();
+    SET_FOR_EACH(small, iter) {
+        result = add_item(iter->item, result);
+    }
+    SET_FOR_EACH(big, iter) {
+        if (!check_item(iter->item, small)) {
+            result = add_item(iter->item, result);
+        }
+    }
+    return result;
+}
+
+
+NODE * glue_sets(NODE *big, NODE* small){
+    NODE* last_item = nullptr;
+    SET_FOR_EACH(small, iter) {
+        last_item = iter;
+    }
+    if (last_item){
+        last_item->pNext = big;
+        return small;
+    }
+    return big;
+}
+
+NODE* intersection_of_sets(NODE *big, NODE* small){
+    NODE* intersected_set = create_empty_set();
+    SET_FOR_EACH(small, iter) {
+        if (check_item(iter->item, big)){
+            intersected_set = add_item(iter->item, intersected_set);
+        }
+    }
+    return intersected_set;
+}
+
+NODE* subtraction_of_sets(NODE *reduced, NODE* subtracted){
+    NODE* result = create_empty_set();
+    SET_FOR_EACH(reduced, iter) {
+        if (!check_item(iter->item, subtracted)){
+            result = add_item(iter->item, result);
+        }
+    }
+    return result;
+}
+
+NODE * symmetric_difference_of_sets(NODE *one, NODE* two){
+    return glue_sets(subtraction_of_sets(one, two), subtraction_of_sets(two, one));
+}
+
 
 PNODE Alloc() {
     auto buff = static_cast<PNODE>(calloc(1, SIZEOF_NODE));
