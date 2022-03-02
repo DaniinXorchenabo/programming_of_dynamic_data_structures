@@ -140,7 +140,7 @@ std::string SetLab3::set_as_string(const std::string &splitter) {
 }
 
 bool SetLab3::is_subset(SetLab3 *subset) {
-    if (subset) {
+    if (!subset) {
         return false;
     }
     SET_FOR_EACH(subset->pHead, iter) {
@@ -159,8 +159,9 @@ bool SetLab3::is_equal(SetLab3 *other) {
 }
 
 SetLab3 *SetLab3::union_sets(SetLab3 *other) {
-    auto *result = new SetLab3(
-            static_cast<function<bool(int)>>(check_element_func));
+    auto *result = new SetLab3([this, other](int i){
+        return this->check_element_func(i) || other->check_element_func(i);
+    });
     SET_FOR_EACH(this->pHead, iter) {
         result->add_item(iter->item);
     }
@@ -186,10 +187,11 @@ SetLab3 *SetLab3::glue_sets(SetLab3 *other) {
 }
 
 SetLab3 *SetLab3::intersection_of_sets(SetLab3 *other) {
-    auto *result = new SetLab3(
-            static_cast<function<bool(int)>>(check_element_func));
+    auto *result = new SetLab3([this, other](int i){
+        return this->check_element_func(i) || other->check_element_func(i);
+    });
     SET_FOR_EACH(this->pHead, iter) {
-        if (this->check_item(other->pHead->item)) {
+        if (other->check_item(iter->item)) {
             result->add_item(iter->item);
         }
     }
@@ -208,8 +210,9 @@ SetLab3 *SetLab3::subtraction_of_sets(SetLab3 *subtracted) {
 }
 
 SetLab3 *SetLab3::symmetric_difference_of_sets(SetLab3 *other) {
-    auto *result = new SetLab3(
-            static_cast<function<bool(int)>>(check_element_func));
+    auto *result = new SetLab3([this, other](int i){
+        return this->check_element_func(i) || other->check_element_func(i);
+    });
     return this->subtraction_of_sets(
             other)->glue_sets(other->subtraction_of_sets(this));
 
