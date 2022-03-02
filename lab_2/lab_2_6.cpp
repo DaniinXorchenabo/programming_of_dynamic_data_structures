@@ -83,13 +83,14 @@ std::string set_as_string(NODE *set_, const std::string &splitter) {
     if (is_empty_set(set_)) {
         return "<empty set>";
     }
-    std::string data = "";
+    std::string data = "(<";
     SET_FOR_EACH(set_, iter) {
         data += std::to_string(iter->item);
-        if (iter->pNext) {
+        if (iter->pNext && iter->pNext->item != INT_MAX) {
             data += splitter;
         }
     }
+    data += ">)";
     return data;
 }
 
@@ -116,10 +117,10 @@ NODE *delete_set(NODE *set_) {
     return set_;
 }
 
-bool is_subset(NODE *subset, NODE* base_set){
+bool is_subset(NODE *subset, NODE *base_set) {
 
     SET_FOR_EACH(subset, iter) {
-        if (!check_item(iter->item, base_set)){
+        if (!check_item(iter->item, base_set)) {
             return false;
         }
     }
@@ -127,17 +128,17 @@ bool is_subset(NODE *subset, NODE* base_set){
 
 }
 
-bool is_equal(NODE *one, NODE* two){
+bool is_equal(NODE *one, NODE *two) {
     return is_subset(one, two) && is_subset(two, one);
 }
 
-NODE * union_sets(NODE *big, NODE* small){
-    NODE* result = create_empty_set();
-    SET_FOR_EACH(small, iter) {
+NODE *union_sets(NODE *big, NODE *small_) {
+    NODE *result = create_empty_set();
+    SET_FOR_EACH(small_, iter) {
         result = add_item(iter->item, result);
     }
     SET_FOR_EACH(big, iter) {
-        if (!check_item(iter->item, small)) {
+        if (!check_item(iter->item, small_)) {
             result = add_item(iter->item, result);
         }
     }
@@ -145,39 +146,39 @@ NODE * union_sets(NODE *big, NODE* small){
 }
 
 
-NODE * glue_sets(NODE *big, NODE* small){
-    NODE* last_item = nullptr;
+NODE *glue_sets(NODE *big, NODE *small) {
+    NODE *last_item = nullptr;
     SET_FOR_EACH(small, iter) {
         last_item = iter;
     }
-    if (last_item){
+    if (last_item) {
         last_item->pNext = big;
         return small;
     }
     return big;
 }
 
-NODE* intersection_of_sets(NODE *big, NODE* small){
-    NODE* intersected_set = create_empty_set();
-    SET_FOR_EACH(small, iter) {
-        if (check_item(iter->item, big)){
+NODE *intersection_of_sets(NODE *big, NODE *small_) {
+    NODE *intersected_set = create_empty_set();
+    SET_FOR_EACH(small_, iter) {
+        if (check_item(iter->item, big)) {
             intersected_set = add_item(iter->item, intersected_set);
         }
     }
     return intersected_set;
 }
 
-NODE* subtraction_of_sets(NODE *reduced, NODE* subtracted){
-    NODE* result = create_empty_set();
+NODE *subtraction_of_sets(NODE *reduced, NODE *subtracted) {
+    NODE *result = create_empty_set();
     SET_FOR_EACH(reduced, iter) {
-        if (!check_item(iter->item, subtracted)){
+        if (!check_item(iter->item, subtracted)) {
             result = add_item(iter->item, result);
         }
     }
     return result;
 }
 
-NODE * symmetric_difference_of_sets(NODE *one, NODE* two){
+NODE *symmetric_difference_of_sets(NODE *one, NODE *two) {
     return glue_sets(subtraction_of_sets(one, two), subtraction_of_sets(two, one));
 }
 
