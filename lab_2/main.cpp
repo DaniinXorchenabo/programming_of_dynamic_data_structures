@@ -17,8 +17,8 @@ int main() {
     std::cout << "size the set of A is: " << len(A) << endl;
     std::cout << "size the set of B is: " << len(B) << endl;
     std::cout << "deleting sets  A and  B ..." << endl;
-    delete_set(A);
-    delete_set(B);
+    A = delete_set(A);
+    B = delete_set(B);
     std::cout << "a set of A after deleted is: " << set_as_string(A) << endl;
     std::cout << "a set of B after deleted is: " << set_as_string(B) << endl;
     std::cout << "\n==========!! Second laboratory work !!==========" << endl;
