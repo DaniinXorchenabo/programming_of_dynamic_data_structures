@@ -166,9 +166,7 @@ SetLab3 *SetLab3::union_sets(SetLab3 *other) {
         result->add_item(iter->item);
     }
     SET_FOR_EACH(other->pHead, iter) {
-        if (!this->check_item(iter->item)) {
             result->add_item(iter->item);
-        }
     }
     return result;
 }

@@ -6,9 +6,9 @@
 
 int main() {
 
-    auto *A = new SetLab3(5, 10, 13,
+    auto *A = new SetLab3(6, 10, 60,
                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
-    auto *B = new SetLab3(5, 10, 40,
+    auto *B = new SetLab3(6, 10, 60,
                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
     std::cout << "==========!! Third laboratory work !!==========" << endl;
     std::cout << "-----------------------------------------------" << endl;
@@ -18,9 +18,9 @@ int main() {
     std::cout << "size the set of B is: " << B->len() << endl;
     std::cout << "deleting sets  A and  B ..." << endl;
 
-    auto *C = new SetLab3(4, 10, 40,
+    auto *C = new SetLab3(8, 10, 60,
                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
-    auto *D = new SetLab3(4, 10, 40,
+    auto *D = new SetLab3(6, 10, 60,
                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
     auto *testing_subset = new SetLab3();
 
