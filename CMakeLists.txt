@@ -12,5 +12,5 @@ add_executable(lab_2  lab_2/main.cpp lab_2/lab_2_6.h lab_2/lab_2_6.cpp lab_2/def
 add_executable(lab_3  lab_3/main.cpp lab_3/set_lab_3.cpp lab_3/defines.h lab_3/set_lab_3.h)
 add_executable(lab_4  lab_4/main.cpp lab_4/SetLab4.cpp lab_4/SetLab4.h)
 add_executable(lab_5  lab_5/main.cpp lab_5/SetLab5.cpp lab_5/SetLab5.h)
-add_executable(lab_6  lab_6_queue/main.cpp lab_6_queue/SetLabQueue.cpp lab_6_queue/SetLabQueue.h)
+add_executable(lab_6  lab_6_queue/main.cpp lab_6_queue/SetLabQueue.cpp lab_6_queue/SetLabQueue.h lab_6_queue/defines.h)
 # add_executable(Ilya_lab_1 lab_1/lab_1_6.h)
