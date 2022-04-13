@@ -42,7 +42,6 @@ public:
     SetLab3(int item_count, int min_, int max_,
             bool (*checkElementFunc)(int) = [](int i) { return true; });
 
-
     ~SetLab3();
 
     [[nodiscard]] bool is_empty_set() const;
@@ -67,12 +66,12 @@ public:
 
     [[nodiscard]] SetLab3 *subtraction_of_sets(SetLab3 *subtracted);
 
-    [[nodiscard]] SetLab3 *symmetric_difference_of_sets(SetLab3 *other);
+    [[nodiscard]] SetLab3 *subtraction_of_sets(SetLab3 *subtracted, const function<bool(int)> &function1);
 
+    [[nodiscard]] SetLab3 *symmetric_difference_of_sets(SetLab3 *other);
 
 private:
     function<bool(int)> check_element_func = [](int i) { return true; };
-
 };
 
 #endif //PROGRAMMING_OF_DYNAMIC_DATA_STRUCTURES_SET_LAB_3_H
