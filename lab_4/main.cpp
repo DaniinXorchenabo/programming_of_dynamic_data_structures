@@ -23,7 +23,7 @@ int main() {
     auto *testing_subset = new SetLab4();
 
     int counter = 0;
-    for(auto item: C->container){
+    for (auto item: C->container) {
         testing_subset->add_item(item);
         counter++;
         if (counter > 2) { break; }
@@ -37,7 +37,7 @@ int main() {
               " is " << (D->is_subset(C) ? "True" : "False") << endl;
 
     auto *C_clone = new SetLab4();
-    for(auto item: C->container) {
+    for (auto item: C->container) {
         C_clone->add_item(item);
     }
     std::cout << "set " << C->set_as_string()
@@ -48,7 +48,7 @@ int main() {
               << (C->is_equal(D) ? " == " : " != ")
               << D->set_as_string() << endl;
 
-    std::cout << "Union a set " <<C->set_as_string()
+    std::cout << "Union a set " << C->set_as_string()
               << " and a set " << D->set_as_string()
               << ". Result: " << C->union_sets(D)->set_as_string() << endl;
     std::cout << "Union a set " << C->set_as_string()

@@ -18,7 +18,7 @@ namespace rng = ranges;
 namespace vw = ranges::views;
 
 bool SetLab4::check_item(int element) {
-    return rng::find(container, element)  != container.end();
+    return rng::find(container, element) != container.end();
 }
 
 bool SetLab4::is_empty_set() const {
@@ -33,7 +33,7 @@ bool SetLab4::add_item(int new_element) {
     return false;
 }
 
-int SetLab4::len(){
+int SetLab4::len() {
     return static_cast<int>(container.size());
 }
 
@@ -43,8 +43,8 @@ string SetLab4::set_as_string(const std::string &splitter) {
         return "<empty set>";
     }
     string data;
-    for(auto item : container){
-        if (!data.empty()){
+    for (auto item: container) {
+        if (!data.empty()) {
             data += splitter;
         }
         data += std::to_string(item);
@@ -53,39 +53,39 @@ string SetLab4::set_as_string(const std::string &splitter) {
 
 }
 
-bool SetLab4::is_subset(SetLab4 *subset){
-    for(auto item: subset->container){
+bool SetLab4::is_subset(SetLab4 *subset) {
+    for (auto item: subset->container) {
         if (!check_item(item)) {
             return false;
         }
     }
     return true;
 }
-bool SetLab4::is_equal(SetLab4 *other){
+
+bool SetLab4::is_equal(SetLab4 *other) {
     return is_subset(other) && other->is_subset(this);
 }
 
 
-
-SetLab4 *SetLab4::union_sets(SetLab4 *other){
-    auto result = new SetLab4([this, other](int i){
+SetLab4 *SetLab4::union_sets(SetLab4 *other) {
+    auto result = new SetLab4([this, other](int i) {
         return this->check_element_func(i) || other->check_element_func(i);
     });
-    for(auto item: other->container){
+    for (auto item: other->container) {
         result->add_item(item);
     }
-    for(auto item: container){
+    for (auto item: container) {
         result->add_item(item);
     }
     return result;
 }
 
-SetLab4 *SetLab4::intersection_of_sets(SetLab4 *other){
-    auto result = new SetLab4([this, other](int i){
+SetLab4 *SetLab4::intersection_of_sets(SetLab4 *other) {
+    auto result = new SetLab4([this, other](int i) {
         return this->check_element_func(i) && other->check_element_func(i);
     });
 
-    for(auto item: container){
+    for (auto item: container) {
         if (other->check_item(item)) {
             result->add_item(item);
         }
@@ -94,14 +94,14 @@ SetLab4 *SetLab4::intersection_of_sets(SetLab4 *other){
     return result;
 }
 
-SetLab4 *SetLab4::subtraction_of_sets(SetLab4 *subtracted){
+SetLab4 *SetLab4::subtraction_of_sets(SetLab4 *subtracted) {
     return subtraction_of_sets(subtracted, static_cast<function<bool(int)>>(check_element_func));
 }
 
-SetLab4 *SetLab4::subtraction_of_sets(SetLab4 *subtracted, const function<bool(int)>& function1){
+SetLab4 *SetLab4::subtraction_of_sets(SetLab4 *subtracted, const function<bool(int)> &function1) {
     auto result = new SetLab4(static_cast<function<bool(int)>>(function1));
 
-    for(auto item: container){
+    for (auto item: container) {
         if (!subtracted->check_item(item)) {
             result->add_item(item);
         }
@@ -111,24 +111,23 @@ SetLab4 *SetLab4::subtraction_of_sets(SetLab4 *subtracted, const function<bool(i
 }
 
 SetLab4 *SetLab4::glue_sets(SetLab4 *other) {
-    for(auto item: other->container){
+    for (auto item: other->container) {
         container.push_back(item);
     }
     return this;
 }
 
 
-SetLab4 *SetLab4::symmetric_difference_of_sets(SetLab4 *other){
+SetLab4 *SetLab4::symmetric_difference_of_sets(SetLab4 *other) {
     auto result = this->subtraction_of_sets(
             other,
-            static_cast<const function<bool(int)>>([this, other](int i){
+            static_cast<const function<bool(int)>>([this, other](int i) {
                 return this->check_element_func(i) || other->check_element_func(i);
             })
     )->glue_sets(other->subtraction_of_sets(this));
 
     return result;
 }
-
 
 
 SetLab4::SetLab4(
@@ -147,7 +146,7 @@ SetLab4::SetLab4(int item_count, int min_, int max_,
     std::vector<int> second(numbers_out.begin(), numbers_out.end());
 
     rng::shuffle(second, gen);
-    for(auto item: second | vw::take(item_count)){
+    for (auto item: second | vw::take(item_count)) {
         container.push_back(item);
     }
 

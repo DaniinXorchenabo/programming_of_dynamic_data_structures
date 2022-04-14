@@ -154,7 +154,6 @@ bool SetLab3::is_subset(SetLab3 *subset) {
 
 bool SetLab3::is_equal(SetLab3 *other) {
     return is_subset(other) && other->is_subset(this);
-
 }
 
 SetLab3 *SetLab3::union_sets(SetLab3 *other) {
