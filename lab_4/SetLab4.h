@@ -42,6 +42,8 @@ public:
     [[nodiscard]] SetLab4 *subtraction_of_sets(SetLab4 *subtracted);
     [[nodiscard]] SetLab4 *subtraction_of_sets(SetLab4 *subtracted, const function<bool(int)>& function1);
 
+
+    SetLab4 *glue_sets(SetLab4 *other);
     [[nodiscard]] SetLab4 *symmetric_difference_of_sets(SetLab4 *other);
 
     list<int> container = {};

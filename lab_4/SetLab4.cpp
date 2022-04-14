@@ -54,21 +54,29 @@ string SetLab4::set_as_string(const std::string &splitter) {
 }
 
 bool SetLab4::is_subset(SetLab4 *subset){
-    return rng::includes(container, subset->container);
+    for(auto item: subset->container){
+        if (!check_item(item)) {
+            return false;
+        }
+    }
+    return true;
 }
 bool SetLab4::is_equal(SetLab4 *other){
     return is_subset(other) && other->is_subset(this);
 }
 
-SetLab4::SetLab4(function<bool(int)> function1) {
-    check_element_func = std::move(function1);
-}
+
 
 SetLab4 *SetLab4::union_sets(SetLab4 *other){
     auto result = new SetLab4([this, other](int i){
         return this->check_element_func(i) || other->check_element_func(i);
     });
-    rng::set_union(container, other->container, back_inserter(result->container));
+    for(auto item: other->container){
+        result->add_item(item);
+    }
+    for(auto item: container){
+        result->add_item(item);
+    }
     return result;
 }
 
@@ -76,7 +84,13 @@ SetLab4 *SetLab4::intersection_of_sets(SetLab4 *other){
     auto result = new SetLab4([this, other](int i){
         return this->check_element_func(i) && other->check_element_func(i);
     });
-    rng::set_intersection(container, other->container, back_inserter(result->container));
+
+    for(auto item: container){
+        if (other->check_item(item)) {
+            result->add_item(item);
+        }
+    }
+
     return result;
 }
 
@@ -86,18 +100,35 @@ SetLab4 *SetLab4::subtraction_of_sets(SetLab4 *subtracted){
 
 SetLab4 *SetLab4::subtraction_of_sets(SetLab4 *subtracted, const function<bool(int)>& function1){
     auto result = new SetLab4(static_cast<function<bool(int)>>(function1));
-    rng::set_difference(container, subtracted->container, back_inserter(result->container));
+
+    for(auto item: container){
+        if (!subtracted->check_item(item)) {
+            result->add_item(item);
+        }
+    }
+
     return result;
 }
 
+SetLab4 *SetLab4::glue_sets(SetLab4 *other) {
+    for(auto item: other->container){
+        container.push_back(item);
+    }
+    return this;
+}
+
+
 SetLab4 *SetLab4::symmetric_difference_of_sets(SetLab4 *other){
-    auto result = new SetLab4(
-            [this, other](int i){
-                return this->check_element_func(i) || other->check_element_func(i);}
-            );
-    rng::set_symmetric_difference(container, other->container,  back_inserter(result->container));
+    auto result = this->subtraction_of_sets(
+            other,
+            static_cast<const function<bool(int)>>([this, other](int i){
+                return this->check_element_func(i) || other->check_element_func(i);
+            })
+    )->glue_sets(other->subtraction_of_sets(this));
+
     return result;
 }
+
 
 
 SetLab4::SetLab4(
@@ -130,3 +161,6 @@ SetLab4::~SetLab4() {
 
 }
 
+SetLab4::SetLab4(function<bool(int)> function1) {
+    check_element_func = std::move(function1);
+}
