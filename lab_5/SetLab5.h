@@ -20,7 +20,6 @@ using namespace std;
 
 class SetLab5 {
 protected:
-    set<int> container = {};
     function<bool(int)> check_element_func = [](int i) { return true; };
 public:
     SetLab5(function<bool(int)> function1);
@@ -55,6 +54,8 @@ public:
     [[nodiscard]] SetLab5 *subtraction_of_sets(SetLab5 *subtracted, const function<bool(int)> &function1);
 
     [[nodiscard]] SetLab5 *symmetric_difference_of_sets(SetLab5 *other);
+
+    set<int> container = {};
 };
 
 

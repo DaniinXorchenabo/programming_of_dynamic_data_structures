@@ -120,4 +120,16 @@ SetLab5::SetLab5(int item_count, int min_, int max_,
         std::cout << "impossible interval (" << min_ << ", " << max_ << ") for items count is " << item_count << endl;
     }
 
+
+}
+
+SetLab5::SetLab5(
+        bool (*checkElementFunc)(int)
+) : check_element_func(checkElementFunc) {
+
+}
+
+
+SetLab5::~SetLab5() {
+
 }
