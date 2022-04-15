@@ -162,14 +162,14 @@ bool SetLab3::is_equal(SetLab3 *other) {
 }
 
 SetLab3 *SetLab3::union_sets(SetLab3 *other) {
-    auto result = new SetLab3([this, other](int i){
+    auto result = new SetLab3([this, other](int i) {
         return this->check_element_func(i) || other->check_element_func(i);
     });
     SET_FOR_EACH(this->pHead, iter) {
         result->add_item(iter->item);
     }
     SET_FOR_EACH(other->pHead, iter) {
-            result->add_item(iter->item);
+        result->add_item(iter->item);
     }
     return result;
 }
@@ -188,7 +188,7 @@ SetLab3 *SetLab3::glue_sets(SetLab3 *other) {
 }
 
 SetLab3 *SetLab3::intersection_of_sets(SetLab3 *other) {
-    auto result = new SetLab3([this, other](int i){
+    auto result = new SetLab3([this, other](int i) {
         return this->check_element_func(i) && other->check_element_func(i);
     });
     SET_FOR_EACH(this->pHead, iter) {
@@ -203,7 +203,7 @@ SetLab3 *SetLab3::subtraction_of_sets(SetLab3 *subtracted) {
     return subtraction_of_sets(subtracted, static_cast<function<bool(int)>>(check_element_func));
 }
 
-SetLab3 *SetLab3::subtraction_of_sets(SetLab3 *subtracted, const function<bool(int)>& function1) {
+SetLab3 *SetLab3::subtraction_of_sets(SetLab3 *subtracted, const function<bool(int)> &function1) {
     auto result = new SetLab3(
             static_cast<function<bool(int)>>(function1));
     SET_FOR_EACH(this->pHead, iter) {
@@ -217,8 +217,8 @@ SetLab3 *SetLab3::subtraction_of_sets(SetLab3 *subtracted, const function<bool(i
 SetLab3 *SetLab3::symmetric_difference_of_sets(SetLab3 *other) {
     return this->subtraction_of_sets(
             other,
-            static_cast<const function<bool(int)>>([this, other](int i){
+            static_cast<const function<bool(int)>>([this, other](int i) {
                 return this->check_element_func(i) || other->check_element_func(i);
             })
-            )->glue_sets(other->subtraction_of_sets(this));
+    )->glue_sets(other->subtraction_of_sets(this));
 }

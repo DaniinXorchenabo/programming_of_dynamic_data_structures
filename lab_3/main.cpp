@@ -7,9 +7,9 @@
 int main() {
 
     auto *A = new SetLab3(6, 10, 60,
-                         [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
+                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
     auto *B = new SetLab3(6, 10, 60,
-                         [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
+                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
     std::cout << "==========!! Third laboratory work !!==========" << endl;
     std::cout << "-----------------------------------------------" << endl;
     std::cout << "a set of A is: " << A->set_as_string() << endl;
@@ -19,9 +19,9 @@ int main() {
     std::cout << "deleting sets  A and  B ..." << endl;
 
     auto *C = new SetLab3(8, 10, 60,
-                         [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
+                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
     auto *D = new SetLab3(6, 10, 60,
-                         [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
+                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
     auto *testing_subset = new SetLab3();
 
     int counter = 0;
@@ -50,7 +50,7 @@ int main() {
               << (C->is_equal(D) ? " == " : " != ")
               << D->set_as_string() << endl;
 
-    std::cout << "Union a set " <<C->set_as_string()
+    std::cout << "Union a set " << C->set_as_string()
               << " and a set " << D->set_as_string()
               << ". Result: " << C->union_sets(D)->set_as_string() << endl;
     std::cout << "Union a set " << C->set_as_string()

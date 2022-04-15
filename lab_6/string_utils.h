@@ -4,6 +4,7 @@
 
 #ifndef PROGRAMMING_OF_DYNAMIC_DATA_STRUCTURES_STRING_UTILS_H
 #define PROGRAMMING_OF_DYNAMIC_DATA_STRUCTURES_STRING_UTILS_H
+
 #include <cstdlib>
 #include <iostream>
 #include <Windows.h>
@@ -30,7 +31,9 @@ namespace rng = ranges;
 namespace vw = ranges::views;
 
 string r_filling(string str, int len, const std::string &splitter = (" "));
+
 string l_filling(string str, int len, const std::string &splitter = (" "));
+
 string center(string str, int len, const std::string &splitter = (" "));
 
 #endif //PROGRAMMING_OF_DYNAMIC_DATA_STRUCTURES_STRING_UTILS_H

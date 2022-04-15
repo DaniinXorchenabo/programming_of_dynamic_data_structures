@@ -24,7 +24,7 @@ bool SetLabQueue::is_empty_set() const {
 }
 
 bool SetLabQueue::check_item(int element) {
-    if (container.empty()){
+    if (container.empty()) {
         return false;
     }
     bool result = false;
@@ -57,7 +57,7 @@ std::string SetLabQueue::set_as_string(const std::string &splitter) {
     return "(<" + data + ">)";
 }
 
-bool SetLabQueue::is_subset(SetLabQueue *subset){
+bool SetLabQueue::is_subset(SetLabQueue *subset) {
     bool result = true;
     SET_FOR_EACH(subset->container, item) {
         result = result && check_item(item);
@@ -70,7 +70,7 @@ bool SetLabQueue::is_equal(SetLabQueue *other) {
 }
 
 SetLabQueue *SetLabQueue::union_sets(SetLabQueue *other) {
-    auto result = new SetLabQueue([this, other](int i){
+    auto result = new SetLabQueue([this, other](int i) {
         return this->check_element_func(i) || other->check_element_func(i);
     });
     SET_FOR_EACH(this->container, item1) {
@@ -83,7 +83,7 @@ SetLabQueue *SetLabQueue::union_sets(SetLabQueue *other) {
 }
 
 SetLabQueue *SetLabQueue::intersection_of_sets(SetLabQueue *other) {
-    auto result = new SetLabQueue([this, other](int i){
+    auto result = new SetLabQueue([this, other](int i) {
         return this->check_element_func(i) && other->check_element_func(i);
     });
     SET_FOR_EACH(this->container, item) {
@@ -98,7 +98,7 @@ SetLabQueue *SetLabQueue::subtraction_of_sets(SetLabQueue *subtracted) {
     return subtraction_of_sets(subtracted, static_cast<function<bool(int)>>(check_element_func));
 }
 
-SetLabQueue *SetLabQueue::subtraction_of_sets(SetLabQueue *subtracted, const function<bool(int)>& function1) {
+SetLabQueue *SetLabQueue::subtraction_of_sets(SetLabQueue *subtracted, const function<bool(int)> &function1) {
     auto result = new SetLabQueue(
             static_cast<function<bool(int)>>(function1));
     SET_FOR_EACH(this->container, item) {
@@ -120,7 +120,7 @@ SetLabQueue *SetLabQueue::glue_sets(SetLabQueue *other) {
 SetLabQueue *SetLabQueue::symmetric_difference_of_sets(SetLabQueue *other) {
     return this->subtraction_of_sets(
             other,
-            static_cast<const function<bool(int)>>([this, other](int i){
+            static_cast<const function<bool(int)>>([this, other](int i) {
                 return this->check_element_func(i) || other->check_element_func(i);
             })
     )->glue_sets(other->subtraction_of_sets(this));

@@ -19,7 +19,7 @@ using std::chrono::milliseconds;
 using std::chrono::nanoseconds;
 using namespace std::chrono_literals;
 
-vector<string> SetAsNode(int len_of_set){
+vector<string> SetAsNode(int len_of_set) {
 //    list<string> ff = {};
 //    return ff;
 
@@ -27,7 +27,7 @@ vector<string> SetAsNode(int len_of_set){
 
     auto begin = std::chrono::steady_clock::now();
     NODE2 *A = create_set(len_of_set, 0, len_of_set + 10,
-                         [](int i) { return true; });
+                          [](int i) { return true; });
     auto end = std::chrono::steady_clock::now();
     auto create_ms = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
     list_of_time.push_back(create_ms);
@@ -39,7 +39,7 @@ vector<string> SetAsNode(int len_of_set){
     list_of_time.push_back(len_ms);
 
     NODE2 *B = create_set(len_of_set, 0, len_of_set + 10,
-                         [](int i) { return true; });
+                          [](int i) { return true; });
 
     begin = std::chrono::steady_clock::now();
     is_subset(A, A);
@@ -93,9 +93,9 @@ vector<string> SetAsNode(int len_of_set){
 //            union_ms, intersection_ms, subtraction_ms, symmetric_difference_ms})
 //            | vw::transform([](int i){return std::to_string(i) ;});
 
-    auto f =  list_of_time | vw::transform([](std::chrono::nanoseconds i){
+    auto f = list_of_time | vw::transform([](std::chrono::nanoseconds i) {
         return to_string(std::chrono::nanoseconds(i).count());
-    }) ;
+    });
 
 //        list<string> ff = {};
 //    return ff;
@@ -108,7 +108,7 @@ vector<string> SetAsNode(int len_of_set){
     return d;
 }
 
-vector<string> SetAsNodeClass(int len_of_set){
+vector<string> SetAsNodeClass(int len_of_set) {
 //    list<string> ff = {};
 //    return ff;
     int counter = 0;
@@ -117,7 +117,7 @@ vector<string> SetAsNodeClass(int len_of_set){
 
     auto begin = std::chrono::steady_clock::now();
     auto *A = new SetLab3(len_of_set, 0, len_of_set + 10,
-               [](int i) { return true; });
+                          [](int i) { return true; });
 
     auto end = std::chrono::steady_clock::now();
     auto create_ms = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
@@ -183,9 +183,9 @@ vector<string> SetAsNodeClass(int len_of_set){
 //    auto f = (new std::chrono::milliseconds[] {create_ms, len_ms, subset_AA_ms, subset_AB_ms, equal_AA_ms, equal_AB_ms,
 //            union_ms, intersection_ms, subtraction_ms, symmetric_difference_ms})
 //            | vw::transform([](int i){return std::to_string(i) ;});
-    auto f =  list_of_time | vw::transform([](std::chrono::nanoseconds i){
-        return to_string(std::chrono::nanoseconds(i).count()) ;
-    }) ;
+    auto f = list_of_time | vw::transform([](std::chrono::nanoseconds i) {
+        return to_string(std::chrono::nanoseconds(i).count());
+    });
 
 //        list<string> ff = {};
 //    return ff;
@@ -194,7 +194,7 @@ vector<string> SetAsNodeClass(int len_of_set){
     return d;
 }
 
-vector<string> SetAsList(int len_of_set){
+vector<string> SetAsList(int len_of_set) {
 //    list<string> ff = {};
 //    return ff;
     int counter = 0;
@@ -269,9 +269,9 @@ vector<string> SetAsList(int len_of_set){
 //    auto f = (new std::chrono::milliseconds[] {create_ms, len_ms, subset_AA_ms, subset_AB_ms, equal_AA_ms, equal_AB_ms,
 //            union_ms, intersection_ms, subtraction_ms, symmetric_difference_ms})
 //            | vw::transform([](int i){return std::to_string(i) ;});
-    auto f =  list_of_time | vw::transform([](std::chrono::nanoseconds i){
-        return to_string(std::chrono::nanoseconds(i).count()) ;
-    }) ;
+    auto f = list_of_time | vw::transform([](std::chrono::nanoseconds i) {
+        return to_string(std::chrono::nanoseconds(i).count());
+    });
 
 //        list<string> ff = {};
 //    return ff;
@@ -280,7 +280,7 @@ vector<string> SetAsList(int len_of_set){
     return d;
 }
 
-vector<string> SetAsSet(int len_of_set){
+vector<string> SetAsSet(int len_of_set) {
 //    list<string> ff = {};
 //    return ff;
     int counter = 0;
@@ -355,9 +355,9 @@ vector<string> SetAsSet(int len_of_set){
 //    auto f = (new std::chrono::milliseconds[] {create_ms, len_ms, subset_AA_ms, subset_AB_ms, equal_AA_ms, equal_AB_ms,
 //            union_ms, intersection_ms, subtraction_ms, symmetric_difference_ms})
 //            | vw::transform([](int i){return std::to_string(i) ;});
-    auto f =  list_of_time | vw::transform([](std::chrono::nanoseconds i){
-        return to_string(std::chrono::nanoseconds(i).count()) ;
-    }) ;
+    auto f = list_of_time | vw::transform([](std::chrono::nanoseconds i) {
+        return to_string(std::chrono::nanoseconds(i).count());
+    });
 
 //        list<string> ff = {};
 //    return ff;
@@ -366,7 +366,7 @@ vector<string> SetAsSet(int len_of_set){
     return d;
 }
 
-vector<string> SetAsQueue(int len_of_set){
+vector<string> SetAsQueue(int len_of_set) {
 //    list<string> ff = {};
 //    return ff;
     int counter = 0;
@@ -375,7 +375,7 @@ vector<string> SetAsQueue(int len_of_set){
 
     auto begin = std::chrono::steady_clock::now();
     auto *A = new SetLabQueue(len_of_set, 0, len_of_set + 10,
-                          [](int i) { return true; });
+                              [](int i) { return true; });
 
     auto end = std::chrono::steady_clock::now();
     auto create_ms = std::chrono::duration_cast<std::chrono::nanoseconds>(end - begin);
@@ -389,7 +389,7 @@ vector<string> SetAsQueue(int len_of_set){
     list_of_time.push_back(len_ms);
 
     auto *B = new SetLabQueue(len_of_set, 0, len_of_set + 10,
-                          [](int i) { return true; });
+                              [](int i) { return true; });
     begin = std::chrono::steady_clock::now();
     A->is_subset(A);
     end = std::chrono::steady_clock::now();
@@ -441,9 +441,9 @@ vector<string> SetAsQueue(int len_of_set){
 //    auto f = (new std::chrono::milliseconds[] {create_ms, len_ms, subset_AA_ms, subset_AB_ms, equal_AA_ms, equal_AB_ms,
 //            union_ms, intersection_ms, subtraction_ms, symmetric_difference_ms})
 //            | vw::transform([](int i){return std::to_string(i) ;});
-    auto f =  list_of_time | vw::transform([](std::chrono::nanoseconds i){
-        return to_string(std::chrono::nanoseconds(i).count()) ;
-    }) ;
+    auto f = list_of_time | vw::transform([](std::chrono::nanoseconds i) {
+        return to_string(std::chrono::nanoseconds(i).count());
+    });
 
 //        list<string> ff = {};
 //    return ff;

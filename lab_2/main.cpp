@@ -7,9 +7,9 @@
 int main() {
 
     NODE2 *A = create_set(5, 10, 13,
-                         [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
+                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
     NODE2 *B = create_set(5, 10, 40,
-                         [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
+                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
     std::cout << "==========!! First laboratory work !!==========" << endl;
     std::cout << "-----------------------------------------------" << endl;
     std::cout << "a set of A is: " << set_as_string(A) << endl;
@@ -25,9 +25,9 @@ int main() {
     std::cout << "--------------------------------------------------" << endl;
 
     NODE2 *C = create_set(4, 10, 40,
-                         [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
+                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
     NODE2 *D = create_set(4, 10, 40,
-                         [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
+                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
     NODE2 *testing_subset = create_empty_set();
     int counter = 0;
     SET2_FOR_EACH(C, iter) {

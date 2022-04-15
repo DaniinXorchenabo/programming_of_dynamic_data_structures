@@ -30,8 +30,6 @@ namespace rng = ranges;
 namespace vw = ranges::views;
 
 
-
-
 int main() {
     setlocale(LC_ALL, "Russian");
 
@@ -73,18 +71,18 @@ int main() {
     }
 
     vector<int> lens = {};
-    for(int j = 0; j < printed_array[0].size(); j++){
+    for (int j = 0; j < printed_array[0].size(); j++) {
         int max_len = 0;
-        for(int index = 0; index < printed_array.size(); index++){
-            if (max_len < printed_array[index][j].size()){
+        for (int index = 0; index < printed_array.size(); index++) {
+            if (max_len < printed_array[index][j].size()) {
                 max_len = static_cast<int>(printed_array[index][j].size());
             }
         }
         lens.push_back(max_len);
     }
 
-    for(int index = 0; index < printed_array.size(); index++){
-        for(int j = 0; j < printed_array[0].size(); j++){
+    for (int index = 0; index < printed_array.size(); index++) {
+        for (int j = 0; j < printed_array[0].size(); j++) {
             printed_array[index][j] = "| " + l_filling(printed_array[index][j], lens[j]) + " ";
         }
         printed_array[index][printed_array[0].size() - 1] += "|";
@@ -92,31 +90,31 @@ int main() {
 
 
     int string_len = 0;
-    for(auto i: printed_array[0]){
+    for (auto i: printed_array[0]) {
         string_len += static_cast<int>(i.size());
     }
     string middle_border;
-    for(int i = 0; i < string_len; i++){
+    for (int i = 0; i < string_len; i++) {
         middle_border += "-";
     }
     cout << endl;
-    for(int i = 0; i < string_len; i++){
+    for (int i = 0; i < string_len; i++) {
         cout << "_";
     }
     cout << endl;
     int count = 0;
-    for (auto cell: printed_array){
+    for (auto cell: printed_array) {
         if (count != 0) {
-            cout << endl ;
+            cout << endl;
             cout << middle_border << endl;
         }
-        for(auto item: cell){
+        for (auto item: cell) {
             cout << item;
         }
-        count ++;
+        count++;
     }
     cout << endl;
-    for(int i = 0; i < string_len; i++){
+    for (int i = 0; i < string_len; i++) {
         cout << "#";
     }
     cout << endl;

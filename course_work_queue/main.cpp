@@ -4,12 +4,11 @@
 #include "defines.h"
 
 
-
 int main() {
     auto *A = new SetLabQueue(6, 10, 60,
-                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
+                              [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
     auto *B = new SetLabQueue(6, 10, 60,
-                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
+                              [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
     std::cout << "==========!! Third laboratory work !!==========" << endl;
     std::cout << "-----------------------------------------------" << endl;
     std::cout << "a set of A is: " << A->set_as_string() << endl;
@@ -19,9 +18,9 @@ int main() {
     std::cout << "deleting sets  A and  B ..." << endl;
 
     auto *C = new SetLabQueue(4, 10, 60,
-                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
+                              [](int i) { return (i >= 10 && i <= 60 && i % 10 > 7); });
     auto *D = new SetLabQueue(4, 10, 60,
-                          [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
+                              [](int i) { return (i >= 10 && i <= 60 && i % 10 > 5); });
     auto *testing_subset = new SetLabQueue();
 
     int counter = 0;

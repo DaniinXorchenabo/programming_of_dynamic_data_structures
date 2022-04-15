@@ -16,7 +16,7 @@ int get_next_item(queue<int> &container, queue<int> &copied_queue) {
 
 bool reverse_copied_in_queue(queue<int> &full_queue, queue<int> &empty_queue) {
     for (
-            int j = full_queue.empty()?-1:full_queue.front();
+            int j = full_queue.empty() ? -1 : full_queue.front();
             !full_queue.empty();
             j = get_next_item(full_queue, empty_queue)
             ) {}
@@ -27,9 +27,9 @@ bool reverse_copied_in_queue(
         queue<int> &full_queue,
         queue<int> &empty_queue1,
         queue<int> &empty_queue2
-        ) {
+) {
     for (
-            int j = full_queue.empty()?-1:full_queue.front();
+            int j = full_queue.empty() ? -1 : full_queue.front();
             !full_queue.empty();
             j = get_next_item(full_queue, empty_queue1)
             ) {
