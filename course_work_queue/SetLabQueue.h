@@ -14,6 +14,8 @@
 #include <cstddef>
 #include <functional>
 
+#include "../base_class/BaseClass.h"
+
 using namespace std;
 
 class SetLabQueue {
@@ -51,8 +53,8 @@ public:
 
     [[nodiscard]] SetLabQueue *subtraction_of_sets(SetLabQueue *subtracted, const function<bool(int)> &function1);
 
-
     SetLabQueue *glue_sets(SetLabQueue *other);
+
     [[nodiscard]] SetLabQueue *symmetric_difference_of_sets(SetLabQueue *other);
 
     queue<int> container = {};
