@@ -12,19 +12,19 @@ namespace rng = std::ranges;
 namespace vw = std::ranges::views;
 
 
-NODE *create_empty_set() {
-    NODE *first_element = Alloc();
+NODE2 *create_empty_set() {
+    NODE2 *first_element = Alloc();
     first_element->item = INT_MAX;
     first_element->pNext = nullptr;
     return first_element;
 }
 
-bool is_empty_set(NODE *testing) {
+bool is_empty_set(NODE2 *testing) {
     return ((testing == nullptr) or (testing->item == INT_MAX));
 }
 
-bool check_item(int element, NODE *testing_list) {
-    SET_FOR_EACH(testing_list, iter) {
+bool check_item(int element, NODE2 *testing_list) {
+    SET2_FOR_EACH(testing_list, iter) {
         if (element == iter->item) {
             return true;
         }
@@ -32,9 +32,9 @@ bool check_item(int element, NODE *testing_list) {
     return false;
 }
 
-NODE *add_item(int new_element, NODE *list_, bool check_element_func(int)) {
+NODE2 *add_item(int new_element, NODE2 *list_, bool check_element_func(int)) {
     if (check_element_func(new_element) && !check_item(new_element, list_)) {
-        NODE *new_first_element = Alloc();
+        NODE2 *new_first_element = Alloc();
         new_first_element->item = new_element;
         new_first_element->pNext = list_;
         return new_first_element;
@@ -42,7 +42,7 @@ NODE *add_item(int new_element, NODE *list_, bool check_element_func(int)) {
     return list_;
 }
 
-NODE *create_set(int item_count, int min_, int max_, bool check_element_func(int)) {
+NODE2 *create_set(int item_count, int min_, int max_, bool check_element_func(int)) {
     random_device rd;   // non-deterministic generator
     mt19937 gen(rd());
     auto numbers_out = vw::iota(min_, max_) | vw::filter(check_element_func);
@@ -50,7 +50,7 @@ NODE *create_set(int item_count, int min_, int max_, bool check_element_func(int
     std::vector<int> second(numbers_out.begin(), numbers_out.end());
 
     rng::shuffle(second, gen);
-    NODE *first_node = nullptr;
+    NODE2 *first_node = nullptr;
     int real_count = 0;
     for (auto iter: second | vw::take(item_count)) {
         first_node = add_item(iter, first_node, check_element_func);
@@ -68,23 +68,23 @@ NODE *create_set(int item_count, int min_, int max_, bool check_element_func(int
 
 }
 
-int len(NODE *set_) {
+int len(NODE2 *set_) {
     if (is_empty_set(set_)) {
         return 0;
     }
     int size = 0;
-    SET_FOR_EACH(set_, iter) {
+    SET2_FOR_EACH(set_, iter) {
         size++;
     }
     return size;
 }
 
-std::string set_as_string(NODE *set_, const std::string &splitter) {
+std::string set_as_string(NODE2 *set_, const std::string &splitter) {
     if (is_empty_set(set_)) {
         return "<empty set>";
     }
     std::string data = "(<";
-    SET_FOR_EACH(set_, iter) {
+    SET2_FOR_EACH(set_, iter) {
         data += std::to_string(iter->item);
         if (iter->pNext && iter->pNext->item != INT_MAX) {
             data += splitter;
@@ -94,14 +94,14 @@ std::string set_as_string(NODE *set_, const std::string &splitter) {
     return data;
 }
 
-NODE *delete_set(NODE *set_) {
-    NODE *last_node = nullptr;
-    NODE *last_last_node = nullptr;
+NODE2 *delete_set(NODE2 *set_) {
+    NODE2 *last_node = nullptr;
+    NODE2 *last_last_node = nullptr;
 
     if (is_empty_set(set_)) {
         return set_;
     }
-    SET_FOR_EACH(set_, iter) {
+    SET2_FOR_EACH(set_, iter) {
         if (last_node) {
             if (last_last_node) {
                 free(last_node);
@@ -117,9 +117,9 @@ NODE *delete_set(NODE *set_) {
     return set_;
 }
 
-bool is_subset(NODE *subset, NODE *base_set) {
+bool is_subset(NODE2 *subset, NODE2 *base_set) {
 
-    SET_FOR_EACH(subset, iter) {
+    SET2_FOR_EACH(subset, iter) {
         if (!check_item(iter->item, base_set)) {
             return false;
         }
@@ -128,16 +128,16 @@ bool is_subset(NODE *subset, NODE *base_set) {
 
 }
 
-bool is_equal(NODE *one, NODE *two) {
+bool is_equal(NODE2 *one, NODE2 *two) {
     return is_subset(one, two) && is_subset(two, one);
 }
 
-NODE *union_sets(NODE *big, NODE *small_) {
-    NODE *result = create_empty_set();
-    SET_FOR_EACH(small_, iter) {
+NODE2 *union_sets(NODE2 *big, NODE2 *small_) {
+    NODE2 *result = create_empty_set();
+    SET2_FOR_EACH(small_, iter) {
         result = add_item(iter->item, result);
     }
-    SET_FOR_EACH(big, iter) {
+    SET2_FOR_EACH(big, iter) {
         if (!check_item(iter->item, small_)) {
             result = add_item(iter->item, result);
         }
@@ -146,9 +146,9 @@ NODE *union_sets(NODE *big, NODE *small_) {
 }
 
 
-NODE *glue_sets(NODE *big, NODE *small) {
-    NODE *last_item = nullptr;
-    SET_FOR_EACH(small, iter) {
+NODE2 *glue_sets(NODE2 *big, NODE2 *small) {
+    NODE2 *last_item = nullptr;
+    SET2_FOR_EACH(small, iter) {
         last_item = iter;
     }
     if (last_item) {
@@ -158,9 +158,9 @@ NODE *glue_sets(NODE *big, NODE *small) {
     return big;
 }
 
-NODE *intersection_of_sets(NODE *big, NODE *small_) {
-    NODE *intersected_set = create_empty_set();
-    SET_FOR_EACH(small_, iter) {
+NODE2 *intersection_of_sets(NODE2 *big, NODE2 *small_) {
+    NODE2 *intersected_set = create_empty_set();
+    SET2_FOR_EACH(small_, iter) {
         if (check_item(iter->item, big)) {
             intersected_set = add_item(iter->item, intersected_set);
         }
@@ -168,9 +168,9 @@ NODE *intersection_of_sets(NODE *big, NODE *small_) {
     return intersected_set;
 }
 
-NODE *subtraction_of_sets(NODE *reduced, NODE *subtracted) {
-    NODE *result = create_empty_set();
-    SET_FOR_EACH(reduced, iter) {
+NODE2 *subtraction_of_sets(NODE2 *reduced, NODE2 *subtracted) {
+    NODE2 *result = create_empty_set();
+    SET2_FOR_EACH(reduced, iter) {
         if (!check_item(iter->item, subtracted)) {
             result = add_item(iter->item, result);
         }
@@ -178,13 +178,13 @@ NODE *subtraction_of_sets(NODE *reduced, NODE *subtracted) {
     return result;
 }
 
-NODE *symmetric_difference_of_sets(NODE *one, NODE *two) {
+NODE2 *symmetric_difference_of_sets(NODE2 *one, NODE2 *two) {
     return glue_sets(subtraction_of_sets(one, two), subtraction_of_sets(two, one));
 }
 
 
-PNODE Alloc() {
-    auto buff = static_cast<PNODE>(calloc(1, SIZEOF_NODE));
+PNODE2 Alloc() {
+    auto buff = static_cast<PNODE2>(calloc(1, SIZEOF_NODE2));
     if (!buff) {
         abort();
     }

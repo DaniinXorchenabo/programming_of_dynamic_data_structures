@@ -5,8 +5,8 @@
 #ifndef PROGRAMMING_OF_DYNAMIC_DATA_STRUCTURES_LAB_2_6_H
 #define PROGRAMMING_OF_DYNAMIC_DATA_STRUCTURES_LAB_2_6_H
 
-#define SIZEOF_NODE \
-    sizeof(NODE)
+#define SIZEOF_NODE2 \
+    sizeof(NODE2)
 
 #include <list>
 #include <iterator>
@@ -18,49 +18,49 @@
 using namespace std;
 
 
-typedef struct NODE_ {
-    NODE_ *pNext = nullptr;
+typedef struct NODE2_ {
+    NODE2_ *pNext = nullptr;
     int item = INT_MAX;
 
-    auto operator<=>(const NODE_ &) const = default;
+    auto operator<=>(const NODE2_ &) const = default;
 
-    bool operator==(const NODE_ &) const = default;
+    bool operator==(const NODE2_ &) const = default;
 
-} NODE, *PNODE;
-
-
-PNODE Alloc();
+} NODE2, *PNODE2;
 
 
-NODE *create_empty_set();
+PNODE2 Alloc();
 
-bool is_empty_set(NODE *testing);
 
-bool check_item(int element, NODE *testing);
+NODE2 *create_empty_set();
 
-[[nodiscard]] NODE *add_item(int new_element, NODE *list_, bool check_element_func(int) = [](int i) { return true; });
+bool is_empty_set(NODE2 *testing);
 
-NODE *create_set(int item_count, int min_, int max_, bool check_element_func(int));
+bool check_item(int element, NODE2 *testing);
 
-int len(NODE *set_);
+[[nodiscard]] NODE2 *add_item(int new_element, NODE2 *list_, bool check_element_func(int) = [](int i) { return true; });
 
-std::string set_as_string(NODE *set_, const std::string &splitter = (", "));
+NODE2 *create_set(int item_count, int min_, int max_, bool check_element_func(int));
 
-[[nodiscard]] NODE *delete_set(NODE *set_);
+int len(NODE2 *set_);
 
-bool is_subset(NODE *subset, NODE *base_set);
+std::string set_as_string(NODE2 *set_, const std::string &splitter = (", "));
 
-bool is_equal(NODE *one, NODE *two);
+[[nodiscard]] NODE2 *delete_set(NODE2 *set_);
 
-[[nodiscard]] NODE *union_sets(NODE *small_, NODE *big);
+bool is_subset(NODE2 *subset, NODE2 *base_set);
 
-[[nodiscard]] NODE *glue_sets(NODE *big, NODE *small_);
+bool is_equal(NODE2 *one, NODE2 *two);
 
-[[nodiscard]] NODE *intersection_of_sets(NODE *big, NODE *small_);
+[[nodiscard]] NODE2 *union_sets(NODE2 *small_, NODE2 *big);
 
-[[nodiscard]] NODE *subtraction_of_sets(NODE *reduced, NODE *subtracted);
+[[nodiscard]] NODE2 *glue_sets(NODE2 *big, NODE2 *small_);
 
-[[nodiscard]] NODE *symmetric_difference_of_sets(NODE *one, NODE *two);
+[[nodiscard]] NODE2 *intersection_of_sets(NODE2 *big, NODE2 *small_);
+
+[[nodiscard]] NODE2 *subtraction_of_sets(NODE2 *reduced, NODE2 *subtracted);
+
+[[nodiscard]] NODE2 *symmetric_difference_of_sets(NODE2 *one, NODE2 *two);
 
 
 #endif //PROGRAMMING_OF_DYNAMIC_DATA_STRUCTURES_LAB_2_6_H
