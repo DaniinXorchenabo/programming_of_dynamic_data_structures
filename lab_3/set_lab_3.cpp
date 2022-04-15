@@ -101,14 +101,19 @@ bool SetLab3::check_item(int element) {
 }
 
 NODE *SetLab3::add_item(int new_element) {
-    if (check_element_func(new_element) && !check_item(new_element)) {
-        NODE *new_first_element = Alloc();
-        new_first_element->item = new_element;
-        new_first_element->pNext = pHead;
-        pHead = new_first_element;
-        return pHead;
+    if (check_element_func(new_element)) {
+        if (!check_item(new_element)) {
+            NODE *new_first_element = Alloc();
+            new_first_element->item = new_element;
+            new_first_element->pNext = pHead;
+            pHead = new_first_element;
+            return pHead;
+        } else {
+
+        }
+    } else {
+        std::cout << "Element " << new_element << " is not correct for this set" << endl;
     }
-    std::cout << "Element " << new_element << " is not correct for this set" << endl;
     return pHead;
 }
 

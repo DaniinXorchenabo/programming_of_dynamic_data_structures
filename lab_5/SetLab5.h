@@ -14,6 +14,7 @@
 #include <cstddef>
 #include <functional>
 
+#include "../base_class/BaseClass.h"
 
 using namespace std;
 
