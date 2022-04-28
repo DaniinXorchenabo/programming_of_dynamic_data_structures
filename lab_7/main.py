@@ -26,19 +26,18 @@ class TreeOfBinarySearch(object):
         try:
             current_item = self.arr[index]
         except KeyError as e:
-            self.arr[index] = new_item
-            return
+            return None
         while current_item != it:
-            index = index * 2 + int(new_item > current_item)
+            index = index * 2 + int(it > current_item)
             if index not in self.arr:
-                arr[index] = new_item
+                self.arr[index] = it
                 return None
             current_item = self.arr[index]
         return index
     
     def print(self, int_size=8, blanks=1) -> None:
         a = {k: v for k, v in self.arr.items()}
-        # print(a)
+
         def design_one_line(part_a: dict[int, int], _counter) -> str:
             emmitator = " " * blanks + " " * int_size + " " * blanks
             part_a: list = [blanks * " " + (str(i) + " " + "[" + str(ind) + "]").center(int_size, " ") + " " * blanks for ind, i in part_a.items()]
@@ -56,8 +55,7 @@ class TreeOfBinarySearch(object):
             deep += 1
             _counter *= 2
             last_ind = 2 * last_ind + 1
-        
-        # a.extend([""] * (_counter - len(a) + 1))
+
         print("=" * (2 + int_size * _counter + 2 * blanks * _counter))
         last_ind = 0
         counter = 0
@@ -74,3 +72,6 @@ if __name__ == '__main__':
     tree = TreeOfBinarySearch()
     [tree.add(randint(0, 100)) for i in range(10)]
     tree.print()
+    while True:
+        a = int(input())
+        print(tree.search(a))
