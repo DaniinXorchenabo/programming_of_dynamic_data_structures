@@ -68,9 +68,9 @@ class TreeOfBinarySearch(object):
         deep = 1
         _counter = 1
         counter = 0
-        while counter <= len(a):
+        while counter < len(a):
             printed_arr = {i + 1: (a[i + 1] if (i + 1) in a else "") for i in range(last_ind, 2 * last_ind + 1)}
-            counter += len([i for i in printed_arr if i != ""])
+            counter += len([i for ind , i in printed_arr.items() if i != ""])
             deep += 1
             _counter *= 2
             last_ind = 2 * last_ind + 1
@@ -78,9 +78,9 @@ class TreeOfBinarySearch(object):
         print("=" * (2 + int_size * _counter + 2 * blanks * _counter))
         last_ind = 0
         counter = 0
-        while counter <= len(a):
+        while counter < len(a):
             printed_arr = {i+1: (a[i+1] if (i+1) in a else "") for i in range(last_ind, 2 * last_ind + 1)}
-            counter += len([i for i in printed_arr if i != ""])
+            counter += len([i for ind, i in printed_arr.items() if i != ""])
             print(design_one_line(printed_arr, _counter))
             print("|" + " " * (int_size * _counter + 2 * blanks * _counter) + "|")
             last_ind = 2 * last_ind + 1
@@ -89,8 +89,65 @@ class TreeOfBinarySearch(object):
     def is_empty(self):
         return not bool(self.arr )
 
+    def from_up_to_down(self):
+
+        def recursion(index, data = []):
+            if index in self.arr:
+                data.append(self.arr[index])
+                recursion(2 * index)
+                recursion(2 * index + 1)
+            return data
+
+        return recursion(1)
+
+    def from_left_to_right(self):
+
+        def find_left(index):
+            new_index = index * 2
+            if new_index not in self.arr:
+                return index
+            return find_left(new_index)
+
+        def recursion(last_index, index, data = []):
+            if index in self.arr:
+                data.append(self.arr[index])
+                if last_index < index:
+                    recursion(index, 2 * index)
+                recursion(index, 2 * index + 1)
+                if last_index > index:
+                    recursion(index, index//2)
+
+            return data
+
+        return recursion(float('inf'), find_left(1))
+
+    def from_down_to_up(self):
+
+        def find_left(index):
+            new_index = index * 2
+            if new_index not in self.arr:
+                return index
+            return find_left(new_index)
+
+        def recursion(last_index, index, data = []):
+            if index in self.arr:
+                if last_index < index:
+                    recursion(index, 2 * index)
+                recursion(index, 2 * index + 1)
+                data.append(self.arr[index])
+                if last_index > index:
+                    recursion(index, index//2)
+
+            return data
+
+        return recursion(float('inf'), find_left(1))
+
+
 
 
 if __name__ == '__main__':
     tree = TreeOfBinarySearch(item_count=10)
     tree.print()
+    print(tree.from_up_to_down())
+    print(tree.from_left_to_right())
+    print(tree.from_down_to_up())
