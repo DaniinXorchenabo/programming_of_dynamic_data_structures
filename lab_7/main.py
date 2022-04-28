@@ -1,12 +1,31 @@
-from random import randint
+from random import randint, shuffle
+from typing import Callable
+from itertools import islice, chain
 
 class TreeOfBinarySearch(object):
 
 
-    def __init__(self):
+    def __init__(self, item_count: int | None = None, check_func=lambda i: True):
+
+        def gen():
+            i = 0
+            yield i
+            while True:
+                data = [j*k for j in range(i, i+10) for k in [1, -1]]
+                shuffle(data)
+                for j in data:
+                    yield j
+                i += 10
+
+
         self.arr = dict()
+        self.check_func = check_func
+        if item_count is not None:
+            list(islice((self.add(i) for i in gen() if self.check_func(i)), item_count))
 
     def add(self, new_item):
+        if self.check_func(new_item) is False:
+            return
         index = 1
         try:
             current_item = self.arr[index]
@@ -67,11 +86,11 @@ class TreeOfBinarySearch(object):
             last_ind = 2 * last_ind + 1
         print("=" * (2 + int_size * _counter + 2 * blanks * _counter))
 
+    def is_empty(self):
+        return not bool(self.arr )
+
+
 
 if __name__ == '__main__':
-    tree = TreeOfBinarySearch()
-    [tree.add(randint(0, 100)) for i in range(10)]
+    tree = TreeOfBinarySearch(item_count=10)
     tree.print()
-    while True:
-        a = int(input())
-        print(tree.search(a))
