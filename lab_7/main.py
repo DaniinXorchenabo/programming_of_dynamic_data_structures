@@ -142,6 +142,30 @@ class TreeOfBinarySearch(object):
 
         return recursion(float('inf'), find_left(1))
 
+    def delete(self):
+
+        def find_left(index):
+            new_index = index * 2
+            if new_index not in self.arr:
+                return index
+            return find_left(new_index)
+
+        def recursion(last_index, index, data=[]):
+            if index in self.arr:
+                if last_index < index:
+                    recursion(index, 2 * index)
+                recursion(index, 2 * index + 1)
+                data.append(self.arr[index])
+                self.arr.pop(index)
+                if last_index > index:
+                    recursion(index, index // 2)
+
+            return data
+
+        return recursion(float('inf'), find_left(1))
+
+
+
 
 
 
@@ -151,3 +175,5 @@ if __name__ == '__main__':
     print(tree.from_up_to_down())
     print(tree.from_left_to_right())
     print(tree.from_down_to_up())
+    print(tree.delete())
+    print(tree.is_empty())
